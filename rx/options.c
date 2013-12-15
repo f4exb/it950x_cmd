@@ -138,7 +138,7 @@ void get_options(int argc, char **argv, options_t *options)
 //=================================================================================================
 void print_options(options_t *options)
 {
-    fprintf(stderr, "Frequency ...............: %d kHz\n", options->frequency);
+    fprintf(stderr, "Frequency ...............: %lu kHz\n", options->frequency);
     fprintf(stderr, "Bandwidth ...............: %d kHz\n", options->bandwidth);
 }
 

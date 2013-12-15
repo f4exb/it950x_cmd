@@ -659,7 +659,7 @@ int dvbout(options_t *options)
         {
 			if (options->verbose)
 			{
-				fprintf(stderr, "read %d (%d, %d) \n", j, r, packets);
+				fprintf(stderr, "read %d (%lu, %d) \n", j, r, packets);
 			}
             usleep(100000); // was 100 ms
             j++;
