@@ -12,19 +12,19 @@ You have to install driver as per instructions found on HiDes website or CD.
 
 Installation:
 
-After cloning this repository execute the bootstrap.sh script in the local copy
-Launch the configure script from a build directory
-Use --prefix to specify the installation directory
-Do make and make install.
+- After cloning this repository execute the bootstrap.sh script in the local copy
+- Launch the configure script from a build directory
+- Use --prefix to specify the installation directory
+- Do make and make install.
 
 Usage:
 
-Use it950x_cmd_rx to control receiver and it950x_cmd_tx to control transmitter
-Use -h option to get a list of options.
+- Use it950x_cmd_rx to control receiver and it950x_cmd_tx to control transmitter
+- Use -h option to get a list of options.
 
 Typical commands:
 
-> it950x_cmd_tx -f 437M -B 2M -R 1200k -i file.ts
-> it950x_cmd_rx -f 437M -B 2M -o - | fifo -b 2000000 | ffplay -
+> - it950x_cmd_tx -f 437M -B 2M -R 1200k -i file.ts
+> - it950x_cmd_rx -f 437M -B 2M -o - | fifo -b 2000000 | ffplay -
 
 The reception command uses an intermediate fifo, see https://github.com/cskiraly/fifo
