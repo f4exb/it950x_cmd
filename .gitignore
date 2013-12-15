@@ -1,0 +1,12 @@
+aclocal.m4
+autom4te.cache
+configure
+depcomp
+install-sh
+missing
+COPYING
+INSTALL
+README
+Makefile.in
+rx/Makefile.in
+tx/Makefile.in

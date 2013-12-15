@@ -1,0 +1,13 @@
+AC_INIT(it950x, 0.1.0)
+AM_INIT_AUTOMAKE(it950x, 0.1.0)
+
+AC_PROG_CC
+AC_LANG(C)
+
+AC_TYPE_SIZE_T
+AC_FUNC_MALLOC
+
+CFLAGS="-fPIC -fno-strict-aliasing $CFLAGS"
+
+AC_CONFIG_FILES([Makefile rx/Makefile tx/Makefile])
+AC_OUTPUT
