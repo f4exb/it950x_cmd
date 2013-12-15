@@ -22,3 +22,9 @@ Usage:
 Use it950x_cmd_rx to control receiver and it950x_cmd_tx to control transmitter
 Use -h option to get a list of options.
 
+Typical commands:
+
+> it950x_cmd_tx -f 437M -B 2M -R 1200k -i file.ts
+> it950x_cmd_rx -f 437M -B 2M -o - | fifo -b 2000000 | ffplay -
+
+The reception command uses an intermediate fifo, see https://github.com/cskiraly/fifo
