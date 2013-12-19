@@ -1069,6 +1069,7 @@ Dword TxDataOutputTest(ModulatorParam *param, options_t *options)
     Byte *fileBuf = NULL;
     Dword Tx_datalength = TRANSMITTER_BLOCK_SIZE;
     int i = 0, k = 0;
+    int stdin_used = 0;
 
     Dword LoopStartTime = 0;
     ULONGLONG FirstSyncBytePos=0;
@@ -1090,7 +1091,12 @@ Dword TxDataOutputTest(ModulatorParam *param, options_t *options)
     req.tv_sec = 0;     
     req.tv_nsec = 1;    
 
-    if(!(TsFile = fopen(options->ts_filename, "r+"))) 
+    if (strcmp("-", options->ts_filename) == 0)
+    {
+        TsFile = stdin;
+        stdin_used = 1;
+    }
+    else if(!(TsFile = fopen(options->ts_filename, "r+"))) 
     {
         fprintf(stderr, "TxDataOutputTest: Open TS File Error!\n");
         return ERR_OPEN_FILE_FAIL;
@@ -1102,8 +1108,11 @@ Dword TxDataOutputTest(ModulatorParam *param, options_t *options)
         return INVALID_HANDLE_VALUE;
     }
 
-    dwFileSize = GetFileSize(options->ts_filename);
-    fprintf(stderr, "%s size = %9jd\n", options->ts_filename, dwFileSize);
+    if (!stdin_used)
+    {
+        dwFileSize = GetFileSize(options->ts_filename);
+        fprintf(stderr, "%s size = %9jd\n", options->ts_filename, dwFileSize);
+    }
 
     if (options->insert_sisdt_custom_packets)
     {
@@ -1122,8 +1131,11 @@ Dword TxDataOutputTest(ModulatorParam *param, options_t *options)
     }
     
     // Check input file data bit rate here, slow but safe 
-    TSFileDataRate = Get_DataBitRate_S(options);
-    fprintf(stderr, "The recommended input file data rate for %s is = %llu bps (%llu kbps)\n", options->ts_filename, TSFileDataRate, TSFileDataRate/1000);
+    if (!stdin_used)
+    {
+        TSFileDataRate = Get_DataBitRate_S(options);
+        fprintf(stderr, "The recommended input file data rate for %s is = %llu bps (%llu kbps)\n", options->ts_filename, TSFileDataRate, TSFileDataRate/1000);
+    }
     
     if (options->ts_data_rate)
     {
