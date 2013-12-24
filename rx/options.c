@@ -81,6 +81,7 @@ void usage(void)
         "\t-s Perform statistics <count>[:<filename>]\n"
         "\t-l Output limit [TS file: MBytes | Packet test: ms] (defaut 0: no limit)\n"
         "\t-o Output TS filename with packet test ('-' for standard output)\n"
+        "\t-r Attempt to re-lock channel after read time out (default 0: no relock)\n"
         "\t-v verbose (set to get packet statistics display)\n"
         "\t\n\n");
     exit(1);
@@ -102,8 +103,9 @@ void get_options(int argc, char **argv, options_t *options)
     options->packet_limit = 0;
     options->ts_filename = 0;
     options->verbose = 0;
+    options->relock = 0;
     
-    while ((opt = getopt(argc, argv, "d:f:B:s:o:l:vh")) != -1) 
+    while ((opt = getopt(argc, argv, "d:f:B:s:o:l:rvh")) != -1) 
     {
         switch (opt) {
         case 'd':
@@ -126,6 +128,9 @@ void get_options(int argc, char **argv, options_t *options)
             break;
         case 'v':
             options->verbose = 1;
+            break;
+        case 'r':
+            options->relock = 1;
             break;
         case 'h':
         default:

@@ -667,7 +667,19 @@ int dvbout(options_t *options)
             if (j>10) // was 10 sec
             {
                 fprintf(stderr, "Read timeout\n", r);
-                break;
+                
+                if (options->relock)
+                {
+                    if (ChannelLock(options) < 0) 
+                    {
+                        fprintf(stderr, "Re-lock channel fail!\n");
+                        break;
+                    }
+                }
+                else
+                {
+                    break;
+                }
             }
             
             continue;

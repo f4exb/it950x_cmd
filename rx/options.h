@@ -35,6 +35,7 @@ typedef struct s_options
     char *ts_filename;
     int packet_limit;
     int verbose;
+    int relock;
 } options_t;
 
 int get_input_param_index(InputParam input_param_list[], size_t input_param_list_size, char *option);
